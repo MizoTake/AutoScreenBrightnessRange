@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AutoScreenBrightnessRange</string>
+    <string name="start">start</string>
+    <string name="end">end</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/root_layout"
+    android:background="#e7faef"
+    android:padding="16dp"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="25sp"
+        android:elevation="2dp"
+        android:background="@drawable/myrect"
+        />
+
+    <it.sephiroth.android.library.rangeseekbar.RangeSeekBar
+        android:id="@+id/rangeSeekBar"
+        style="@style/Base.Sephiroth.Widget.RangeSeekBar"
+        android:layout_width="375dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:max="255"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view"
+        app:range_progress_endMinValue="0"
+        app:range_progress_endValue="60"
+        app:range_progress_startEnd_minDiff="1"
+        app:range_progress_startValue="10" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/start_button"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:elevation="2dp"
+        android:background="@drawable/myrect"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/stop_button"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end"
+        android:elevation="2dp"
+        android:background="@drawable/myrect"/>
+</LinearLayout>
