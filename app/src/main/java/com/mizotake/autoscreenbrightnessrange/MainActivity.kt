@@ -9,7 +9,12 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import it.sephiroth.android.library.rangeseekbar.RangeSeekBar
 import it.sephiroth.android.library.rangeseekbar.RangeSeekBar.OnRangeSeekBarChangeListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -73,6 +78,33 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
             stopService(serviceIntent)
         }
+    }
+
+    private fun initlizeAdMob() {
+        val params = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+
+        MobileAds.initialize(
+            this,
+            ""
+        )
+
+        val layout = RelativeLayout(this)
+        setContentView(layout)
+
+        val adMobView = AdView(this)
+        adMobView.adUnitId = ""
+        adMobView.adSize = AdSize.BANNER
+        layout.addView(adMobView)
+
+        adMobView.layoutParams = params
+
+        val adRequest = AdRequest.Builder().build()
+        adMobView.loadAd(adRequest)
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
