@@ -1,5 +1,9 @@
 package com.mizotake.autoscreenbrightnessrange
 
+//import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.AdSize
+//import com.google.android.gms.ads.AdView
+//import com.google.android.gms.ads.MobileAds
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -9,12 +13,7 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import it.sephiroth.android.library.rangeseekbar.RangeSeekBar
 import it.sephiroth.android.library.rangeseekbar.RangeSeekBar.OnRangeSeekBarChangeListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,9 +27,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        initlizeAdMob()
+
         val (start, end) = rangeValue
         rangeSeekBar.setProgress(start, end)
-        text_view.text = "Screen Brightness : ${rangeSeekBar.progressStart} ~ ${rangeSeekBar.progressEnd}"
+        val seekStart = "%.2f".format(rangeSeekBar.progressStart / 255f)
+        val seekEnd = "%.2f".format(rangeSeekBar.progressEnd / 255f)
+        text_view.text = "Screen Brightness : ${seekStart} ~ ${seekEnd}"
 
         if(!canWrite){
             rangeSeekBar.isEnabled = false
@@ -44,7 +47,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 progressEnd: Int,
                 fromUser: Boolean
             ) {
-                text_view.text = "Screen Brightness : ${progressStart} ~ ${progressEnd}"
+                val seekStart = "%.2f".format(rangeSeekBar.progressStart / 255f)
+                val seekEnd = "%.2f".format(rangeSeekBar.progressEnd / 255f)
+                text_view.text = "Screen Brightness : ${seekStart} ~ ${seekEnd}"
                 rangeValue = Pair(progressStart, progressEnd)
             }
             override fun onStartTrackingTouch(seekBar: RangeSeekBar) {}
@@ -81,30 +86,30 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun initlizeAdMob() {
-        val params = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
-
-        MobileAds.initialize(
-            this,
-            ""
-        )
-
-        val layout = RelativeLayout(this)
-        setContentView(layout)
-
-        val adMobView = AdView(this)
-        adMobView.adUnitId = ""
-        adMobView.adSize = AdSize.BANNER
-        layout.addView(adMobView)
-
-        adMobView.layoutParams = params
-
-        val adRequest = AdRequest.Builder().build()
-        adMobView.loadAd(adRequest)
+//        val params = RelativeLayout.LayoutParams(
+//            RelativeLayout.LayoutParams.MATCH_PARENT,
+//            RelativeLayout.LayoutParams.WRAP_CONTENT
+//        )
+//
+//        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+//
+//        MobileAds.initialize(
+//            this,
+//            BuildConfig.ADMOBID
+//        )
+//
+//        val layout = RelativeLayout(this)
+//        setContentView(layout)
+//
+//        val adMobView = AdView(this)
+//        adMobView.adUnitId = BuildConfig.ADMOBID
+//        adMobView.adSize = AdSize.BANNER
+//        layout.addView(adMobView)
+//
+//        adMobView.layoutParams = params
+//
+//        val adRequest = AdRequest.Builder().build()
+//        adMobView.loadAd(adRequest)
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -119,6 +124,3 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         setBrightness(brightness)
     }
 }
-
-
-
